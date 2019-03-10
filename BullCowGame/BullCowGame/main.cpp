@@ -1,55 +1,61 @@
 #include <iostream>
 #include <string>
-
-using namespace std;
+#include "FBullCowGame.hpp"
 
 void PrintIntro();
 void PlayGame();
 void PrintGuess();
 bool AskToPlayAgain();
-string GetGuess();
+std::string GetGuess();
+FBullCowGame BCGame;
 
 int main(int argc, const char * argv[]) {
-    PrintIntro();
     do {
+        PrintIntro();
         PlayGame();
+        // TODO: summarize the status of game
     } while (AskToPlayAgain());
     return 0; // exit the application
 }
 
 void PrintIntro() {
     constexpr int WORD_LENGTH = 5;
-    cout << "Welcome To Bulls and Cows" << endl;
-    cout << "Can you guess the " << WORD_LENGTH;
-    cout << " letter isogram I'm thinking of?\n";
+    std::cout << "Welcome To Bulls and Cows" << std::endl;
+    std::cout << "Can you guess the " << WORD_LENGTH;
+    std::cout << " letter isogram I'm thinking of?\n";
     return;
 }
 
-void PrintGuess(string guess) {
-    cout << "Your guess was " << guess << "!!!";
-    cout << endl;
+void PrintGuess(std::string guess) {
+    std::cout << "Your guess was " << guess << "!!!";
+    std::cout << std::endl;
 }
 
 // loop for the number of turns asking for guesses
 void PlayGame() {
-    constexpr int NUMBER_OF_TURNS = 5;
-    for (int i = 1; i <= NUMBER_OF_TURNS; i++) {
-        string Guess = GetGuess();
+    BCGame.Reset();
+    int MaxTries = BCGame.GetMaxTries();
+    
+    // TODO: refactor to use while loop
+    for (int i = 1; i <= MaxTries; i++) {
+        std::string Guess = GetGuess(); // TODO: make loop checking valid guesses
+        
+        // Submit valid guess to the game print number of bulls and cows
         PrintGuess(Guess);
-        cout << endl;
+        std::cout << std::endl;
     }
 }
 
-string GetGuess() {
-    string Guess = "";
-    cout << "What is your guess? ";
-    getline (cin, Guess);
+std::string GetGuess() {
+    std::string Guess = "";
+    std::cout << "What is your guess? ";
+    getline (std::cin, Guess);
     return Guess;
 }
 
 bool AskToPlayAgain() {
-    cout << "Do you want to play again? ";
-    string Response = "";
-    getline(cin, Response);
+    std::cout << "Do you want to play again (y/n)? ";
+    std::string Response = "";
+    getline(std::cin, Response);
     return (Response[0] == 'y') || (Response[0] == 'Y');
 }
