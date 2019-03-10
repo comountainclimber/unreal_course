@@ -4,20 +4,17 @@
 using namespace std;
 
 void PrintIntro();
-string GetGuessAndPrintBack();
+void PlayGame();
+void PrintGuess();
+bool AskToPlayAgain();
+string GetGuess();
 
 int main(int argc, const char * argv[]) {
     PrintIntro();
-
-    // loop for the number of turns asking for guesses
-    constexpr int NUMBER_OF_TURNS = 5;
-    for (int i = 1; i <= NUMBER_OF_TURNS; i++) {
-        GetGuessAndPrintBack();
-        cout << endl;
-    }
-
-    cout << endl;
-    return 0;
+    do {
+        PlayGame();
+    } while (AskToPlayAgain());
+    return 0; // exit the application
 }
 
 void PrintIntro() {
@@ -28,11 +25,31 @@ void PrintIntro() {
     return;
 }
 
-string GetGuessAndPrintBack() {
+void PrintGuess(string guess) {
+    cout << "Your guess was " << guess << "!!!";
+    cout << endl;
+}
+
+// loop for the number of turns asking for guesses
+void PlayGame() {
+    constexpr int NUMBER_OF_TURNS = 5;
+    for (int i = 1; i <= NUMBER_OF_TURNS; i++) {
+        string Guess = GetGuess();
+        PrintGuess(Guess);
+        cout << endl;
+    }
+}
+
+string GetGuess() {
     string Guess = "";
     cout << "What is your guess? ";
     getline (cin, Guess);
-    cout << "Your guess was " << Guess << "!!!";
-    cout << endl;
     return Guess;
+}
+
+bool AskToPlayAgain() {
+    cout << "Do you want to play again? ";
+    string Response = "";
+    getline(cin, Response);
+    return (Response[0] == 'y') || (Response[0] == 'Y');
 }
