@@ -12,3 +12,5 @@ StarterContent/
 BullCowGame.xcodeproj/
 BuildingEscape.xcodeproj/
 BuildingEscape.xcworkspace/
+**/xcuserdata
+MacNoEditor/
