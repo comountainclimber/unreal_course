@@ -1,3 +1,7 @@
+/*
+  The game logic (no view code or direct user interaction)
+ the game is a simple word game based on Mastermind.
+ */
 #pragma once
 
 #include <string>
@@ -30,14 +34,14 @@ public:
     EGuessStatus CheckGuessValidity(FString) const;
     bool isGameWon() const;
 
-    void Reset(); // TODO make a more rich return value
+    void Reset();
 
     FBullCowCount SubmitValidGuess(FString);
     
 private:
+    // see constructor for initialization
     bool BGameWon = false;
     int32 MyCurrentTry;
-    int32 MyMaxTries;
     FString MyHiddenWord;
     
     bool IsIsogram(FString) const;

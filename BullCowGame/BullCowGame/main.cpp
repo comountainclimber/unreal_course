@@ -4,20 +4,24 @@
  and is responsible for all user interactions. For game
  logic see the FBullCowGame class
  */
+#pragma once
 
 #include <iostream>
 #include <string>
 #include "FBullCowGame.hpp"
 
+// to make syntax UE friendly
 using FText = std::string;
 using int32 = int;
 
+// function prototypes outside of a class
 void PlayGame();
-void PrintGuess();
 void PrintGameSummary();
 void PrintIntro();
 bool AskToPlayAgain();
 FText GetValidGuess();
+
+// instantiate a new game for reuse across replays
 FBullCowGame BCGame;
 
 int main(int argc, const char * argv[]) {
@@ -43,11 +47,6 @@ void PrintIntro() {
     std::cout << " letter isogram I'm thinking of?\n\n";
     
     return;
-}
-
-void PrintGuess(FText guess) {
-    std::cout << "Your guess was " << guess << ".";
-    std::cout << std::endl;
 }
 
 void PrintGameSummary() {
