@@ -23,19 +23,23 @@ public:
     FBullCowGame();
 
     // type function const indicates a read only getter
+    // does not change member vars
     int32 GetMaxTries() const;
     int32 GetCurrentTry() const;
     int32 GetHiddenWordLength() const;
     EGuessStatus CheckGuessValidity(FString) const;
     bool isGameWon() const;
 
-    void Reset(); // TODO mae a more rich return value
+    void Reset(); // TODO make a more rich return value
 
     FBullCowCount SubmitValidGuess(FString);
     
 private:
+    bool BGameWon = false;
     int32 MyCurrentTry;
     int32 MyMaxTries;
     FString MyHiddenWord;
-    bool BGameWon = false;
+    
+    bool IsIsogram(FString) const;
+    bool IsLowercase(FString) const;
 };

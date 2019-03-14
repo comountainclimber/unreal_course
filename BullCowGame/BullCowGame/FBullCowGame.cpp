@@ -1,5 +1,7 @@
 #include "FBullCowGame.hpp"
 #include <string>
+#include <map>
+#define TMap std::map
 
 using int32 = int;
 using FString = std::string;
@@ -20,10 +22,30 @@ int32 FBullCowGame::GetHiddenWordLength() const {
     return MyHiddenWord.length();
 }
 
-
 FBullCowGame::FBullCowGame() {
     FBullCowGame::Reset();
     return;
+}
+
+bool FBullCowGame::IsIsogram(FString Word) const {
+    if (Word.length() <= 1 ) return true;
+    TMap<char, bool> LettersSeen;
+    // auto keyword allows the compiler to determine
+    // the type in the iterator
+    for (auto Letter : Word) {
+        Letter = tolower(Letter);
+        if (LettersSeen[Letter]) return false;
+        LettersSeen[Letter] = true;
+    }
+    return true;
+}
+
+bool FBullCowGame::IsLowercase(FString Word) const {
+    for (auto Letter : Word) {
+        bool IsLowercase = islower(Letter);
+        if (!IsLowercase) return IsLowercase;
+    }
+    return true;
 }
 
 void FBullCowGame::Reset() {
@@ -39,9 +61,9 @@ void FBullCowGame::Reset() {
 }
 
 EGuessStatus FBullCowGame::CheckGuessValidity(FString Guess) const {
-    if (false) {
+    if (!IsIsogram(Guess)) {
         return EGuessStatus::Not_Isogram;
-    } else if (false) {
+    } else if (!IsLowercase(Guess)) {
         return EGuessStatus::Not_Lowercase;
     } else if (Guess.length() != GetHiddenWordLength()) {
         return EGuessStatus::Wrong_Length;
@@ -72,6 +94,3 @@ FBullCowCount FBullCowGame::SubmitValidGuess(FString Guess) {
 
     return BullCowCount;
 }
-
-
-

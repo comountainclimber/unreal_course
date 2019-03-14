@@ -30,9 +30,18 @@ int main(int argc, const char * argv[]) {
 }
 
 void PrintIntro() {
-    std::cout << "Welcome To Bulls and Cows a fun word game written in C++." << std::endl;
+    std::cout << R"(
+    ____  _    _ _      _       _____            _   _ _____     _____ ______          _______
+    |  _ \| |  | | |    | |     / ____|     /\   | \ | |  __ \   / ____/ __ \ \        / / ____|
+    | |_) | |  | | |    | |    | (___      /  \  |  \| | |  | | | |   | |  | \ \  /\  / / (___
+    |  _ <| |  | | |    | |     \___ \    / /\ \ | . ` | |  | | | |   | |  | |\ \/  \/ / \___ \
+    | |_) | |__| | |____| |____ ____) |  / ____ \| |\  | |__| | | |___| |__| | \  /\  /  ____) |
+    |____/ \____/|______|______|_____/  /_/    \_\_| \_|_____/   \_____\____/   \/  \/  |_____/
+    )" << '\n';
+    std::cout << "\nWelcome To Bulls and Cows a fun word game written in C++." << std::endl;
     std::cout << "Can you guess the " << BCGame.GetHiddenWordLength();
     std::cout << " letter isogram I'm thinking of?\n\n";
+    
     return;
 }
 
@@ -58,7 +67,6 @@ void PlayGame() {
         FBullCowCount BullCowCount = BCGame.SubmitValidGuess(Guess);
         std::cout << "Bulls = " << BullCowCount.Bulls;
         std::cout << " Cows = " << BullCowCount.Cows << std::endl;
-        PrintGuess(Guess);
         std::cout << std::endl;
     }
 }
@@ -68,7 +76,8 @@ FText GetValidGuess() {
     FText Guess = "";
     do {
         int32 CurrentTry = BCGame.GetCurrentTry();
-        std::cout << "Try " << CurrentTry << ". Enter your guess: ";
+        std::cout << "Try " << CurrentTry << " of " << BCGame.GetMaxTries() << " - \n";
+        std::cout << "Enter your guess: ";
         getline (std::cin, Guess);
         Status = BCGame.CheckGuessValidity(Guess);
         
@@ -77,7 +86,7 @@ FText GetValidGuess() {
                 std::cout << "Please enter a " << BCGame.GetHiddenWordLength() << " letter word.\n\n";
                 break;
             case EGuessStatus::Not_Isogram:
-                std::cout << "Please enter an isogram.\n\n";
+                std::cout << "Please enter a word without repeating letters.\n\n";
                 break;
             case EGuessStatus::Not_Lowercase:
                 std::cout << "Please enter all lowercase letters.\n\n";
