@@ -1,4 +1,14 @@
 .DS_Store
-node_modules/*
-/node_modules/
-xcuserdata/
+
+# unreal generated files
+Binaries/
+Build/
+Intermediate/
+Saved/
+DerivedDataCache/
+StarterContent/
+
+# IDE generated
+BullCowGame.xcodeproj/
+BuildingEscape.xcodeproj/
+BuildingEscape.xcworkspace/
