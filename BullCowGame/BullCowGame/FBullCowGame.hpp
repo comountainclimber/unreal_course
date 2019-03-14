@@ -2,21 +2,40 @@
 
 #include <string>
 
+using FString = std::string;
+using int32 = int;
+
+struct FBullCowCount {
+    int32 Bulls = 0;
+    int32 Cows = 0;
+};
+
+enum class EGuessStatus {
+    Invalid_Status,
+    OK,
+    Not_Isogram,
+    Not_Lowercase,
+    Wrong_Length
+};
+
 class FBullCowGame {
 public:
     FBullCowGame();
 
-    int GetMaxTries() const;
-    int GetCurrentTry() const;
+    // type function const indicates a read only getter
+    int32 GetMaxTries() const;
+    int32 GetCurrentTry() const;
+    int32 GetHiddenWordLength() const;
+    EGuessStatus CheckGuessValidity(FString) const;
     bool isGameWon() const;
-    
-    void Reset(); // TODO mae a more rich return value
-    bool CheckGuessValidity(std::string);
-    
-    // provide a method for counting
-    // bulls and cow and increasing turn #
 
+    void Reset(); // TODO mae a more rich return value
+
+    FBullCowCount SubmitValidGuess(FString);
+    
 private:
-    int MyCurrentTry;
-    int MyMaxTries;
+    int32 MyCurrentTry;
+    int32 MyMaxTries;
+    FString MyHiddenWord;
+    bool BGameWon = false;
 };
