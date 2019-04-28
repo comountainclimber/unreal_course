@@ -26,6 +26,7 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 private:
+    // UPROPERTY macro allows these to be configurable in the editor
     UPROPERTY(VisibleAnywhere)
     float OpenAngle = 90.0f;
     
