@@ -47,6 +47,6 @@ void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
         OpenDoor();
     }
     
-    GetWorld()->GetTimeSeconds()
+    GetWorld()->GetTimeSeconds();
 }
 
