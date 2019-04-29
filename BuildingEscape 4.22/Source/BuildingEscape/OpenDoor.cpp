@@ -46,5 +46,7 @@ void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
         // if the ActorThatOpens is in the volume - open the door
         OpenDoor();
     }
+    
+    GetWorld()->GetTimeSeconds()
 }
 
