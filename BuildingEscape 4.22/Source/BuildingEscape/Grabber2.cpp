@@ -31,6 +31,10 @@ void UGrabber2::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	// ...
+	// Get player view point this tick
+    
+    // Ray-cast out to reach distance (private variable)
+    
+    // See what we hit
 }
 
