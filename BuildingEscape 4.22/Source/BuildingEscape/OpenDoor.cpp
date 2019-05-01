@@ -1,4 +1,5 @@
 // Fill out your copyright notice in the Description page of Project Settings.
+#include <iostream>
 
 #include "OpenDoor.h"
 #include "Gameframework/Actor.h"
@@ -16,20 +17,22 @@ UOpenDoor::UOpenDoor()
 
 void UOpenDoor::OpenDoor()
 {
-    AActor* Owner = GetOwner();
-
-    // Create a rotator
-    FRotator NewRotation = FRotator(0.0f, -60.0f, 0.0f);
-
-    // Set the door rotation
-    Owner->SetActorRotation(NewRotation);
+    Owner->SetActorRotation(FRotator(0.0f, OpenAngle, 0.0f));
 }
+
+
+void UOpenDoor::CloseDoor()
+{
+    Owner->SetActorRotation(FRotator(0.f, 0.f, 0.f));
+}
+
 
 // Called when the game starts
 void UOpenDoor::BeginPlay()
 {
 	Super::BeginPlay();
     
+    Owner = GetOwner();
     // Top down from world to the player controller to the pawn
     ActorThatOpens = GetWorld()->GetFirstPlayerController()->GetPawn();
 }
@@ -45,8 +48,14 @@ void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
     {
         // if the ActorThatOpens is in the volume - open the door
         OpenDoor();
+        
+        LastDoorOpenTime = GetWorld()->GetTimeSeconds();
     }
     
-    GetWorld()->GetTimeSeconds();
+    // Check if it is time to close door
+    if (GetWorld()->GetTimeSeconds() - LastDoorOpenTime > DoorCloseDelay)
+    {
+        CloseDoor();
+    }
 }
 
