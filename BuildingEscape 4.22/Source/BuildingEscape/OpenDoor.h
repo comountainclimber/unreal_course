@@ -42,5 +42,4 @@ private:
     
     AActor* ActorThatOpens; // Remember pawn inherits from Actor
     AActor* Owner;
-    
 };
