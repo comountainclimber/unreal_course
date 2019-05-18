@@ -14,3 +14,4 @@ BuildingEscape.xcodeproj/
 BuildingEscape.xcworkspace/
 **/xcuserdata
 MacNoEditor/
+.vscode
