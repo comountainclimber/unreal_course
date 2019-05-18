@@ -40,6 +40,7 @@ void UGrabber2::Grab()
 void UGrabber2::Release()
 {
     UE_LOG(LogTemp, Warning, TEXT("Releasing!"));
+    PhysicsHandle->ReleaseComponent();
     
     // TODO release phsyics handle
 }
