@@ -19,7 +19,7 @@ UOpenDoor::UOpenDoor()
 
 void UOpenDoor::OpenDoor()
 {
-    Owner->SetActorRotation(FRotator(0.0f, OpenAngle, 0.0f));
+    OnOpenRequest.Broadcast();
 }
 
 

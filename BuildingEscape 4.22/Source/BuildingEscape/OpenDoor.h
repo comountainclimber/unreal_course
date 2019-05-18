@@ -7,6 +7,8 @@
 #include "Components/ActorComponent.h"
 #include "OpenDoor.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnOpenRequest);
+
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class BUILDINGESCAPE_API UOpenDoor : public UActorComponent
 {
@@ -26,7 +28,10 @@ protected:
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-
+    
+    UPROPERTY(BlueprintAssignable)
+    FOnOpenRequest OnOpenRequest;
+    
 private:
     // UPROPERTY macro allows these to be configurable in the editor
     UPROPERTY(EditAnywhere)
