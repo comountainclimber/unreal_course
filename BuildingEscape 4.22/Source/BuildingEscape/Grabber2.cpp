@@ -32,7 +32,12 @@ void UGrabber2::Grab()
     if (ActorHit)
     {
         // If we hit something than attach a phsyics handle
-        PhysicsHandle->GrabComponent(ComponentToGrab, NAME_None, ComponentToGrab->GetOwner()->GetActorLocation(), true);
+        PhysicsHandle->GrabComponent(
+            ComponentToGrab,
+            NAME_None,
+            ComponentToGrab->GetOwner()->GetActorLocation(),
+            true
+        );
     }
 }
 
@@ -108,8 +113,9 @@ FVector UGrabber2::GetReachLineStart()
     
     // Get player view point this tick
     GetWorld()->GetFirstPlayerController()->GetPlayerViewPoint(
-                                                               OUT PlayerViewPointLocation,
-                                                               OUT PlayerViewPointRotation);
+        OUT PlayerViewPointLocation,
+        OUT PlayerViewPointRotation
+    );
     
     return PlayerViewPointLocation;
 }
@@ -122,7 +128,8 @@ FVector UGrabber2::GetReachLineEnd()
     // Get player view point this tick
     GetWorld()->GetFirstPlayerController()->GetPlayerViewPoint(
         OUT PlayerViewPointLocation,
-        OUT PlayerViewPointRotation);
+        OUT PlayerViewPointRotation
+    );
 
     return PlayerViewPointLocation + PlayerViewPointRotation.Vector() * Reach;
 }
